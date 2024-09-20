@@ -12,7 +12,6 @@ public class ScooterPage {
     private final By questionInItem = By.xpath("./*[@data-accordion-component='AccordionItemHeading']/*[starts-with(@id, 'accordion__heading-')]");
     private final By answerInItem = By.xpath("./*[@data-accordion-component='AccordionItemPanel']");
     private final By buttonForCookie = By.className("App_CookieButton__3cvqF");
-    private final By positionForScroll = By.id("accordion__heading-0");
 
     //подя для заполнения формы заказа для кого самокат
     private final By fieldForAddClientFirstName = byPlaceholder("* Имя");
@@ -47,8 +46,6 @@ public class ScooterPage {
     private static By byPlaceholder(String placeholder) {
         return By.xpath("//*[@placeholder='" + placeholder + "']");
     }
-
-
 
     public List<WebElement> getQuestions() {
         return driver.findElements(byQuestionAndAnswers);
