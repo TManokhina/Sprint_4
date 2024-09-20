@@ -42,15 +42,15 @@ public class OrderTest extends BaseSetUpTest {
 
 
     @Test
-    public void checkOrder() {
+    public void checkOrderByUsingTopOrderButton() {
         //кликаем на верхнюю кнопку заказа
         scooterPage.clickOnTopOrderButton();
         checkOrderProcess();
     }
 
     @Test
-    public void checkAnotherOrder() {
-        //кликаем на верхнюю кнопку заказа
+    public void checkOrderByUsingBottomOrderButton() {
+        //кликаем на нижнюю кнопку заказа
         scooterPage.clickOnBottomOrderButton();
         checkOrderProcess();
     }
