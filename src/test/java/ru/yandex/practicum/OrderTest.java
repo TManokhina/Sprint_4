@@ -1,23 +1,14 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.After;
-import org.junit.Before;
+package ru.yandex.practicum;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-
-import java.util.concurrent.TimeUnit;
+import ru.yandex.practicum.BaseSetUpTest;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
-public class OrderTest {
-
-    ScooterPage scooterPage;
+public class OrderTest extends BaseSetUpTest {
     private final String clientFirstName;
     private final String clientLastName;
     private final String deliveryAddress;
@@ -27,9 +18,10 @@ public class OrderTest {
     private final String rentalPeriod;
     private final String scooterColor;
     private final String commentForCourier;
-    private WebDriver driver;
 
-    public OrderTest(String clientFirstName, String clientLastName, String deliveryAddress, int clientMetroStation, String clientPhoneNumber, String deliveryDate, String rentalPeriod, String scooterColor, String commentForCourier) {
+
+    public OrderTest(String clientFirstName, String clientLastName, String deliveryAddress, int clientMetroStation,
+                     String clientPhoneNumber, String deliveryDate, String rentalPeriod, String scooterColor, String commentForCourier) {
         this.clientFirstName = clientFirstName;
         this.clientLastName = clientLastName;
         this.deliveryAddress = deliveryAddress;
@@ -49,19 +41,6 @@ public class OrderTest {
         };
     }
 
-    //создание драйвера
-    @Before
-    public void setUp() {
-        WebDriverManager.chromedriver().setup();
-        //FirefoxOptions options = new FirefoxOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage");
-        ChromeOptions options = new ChromeOptions().addArguments("--no-sandbox", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-        scooterPage = new ScooterPage(driver);
-        scooterPage.clickInButtonForCookie();
-    }
 
     @Test
     public void checkOrder() {
@@ -89,9 +68,5 @@ public class OrderTest {
         assertEquals("Заказ успешно оформлен", "Заказ оформлен", orderConfirmed.substring(0, 14));
     }
 
-    @After
-    public void tearDown() {
-        //закрываем браузер
-        driver.quit();
-    }
+
 }
